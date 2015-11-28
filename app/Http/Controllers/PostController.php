@@ -51,13 +51,14 @@ class PostController extends Controller
     {
         //auth()->logout();
         auth()->loginUsingId(1);
+        
         $post = Post::findOrfail($id);
+        $this->authorize('update', $post);
 
-        if (auth()->user()->can('update-post', $post)){
-            return 'You can update this';
-        }
+        // if (auth()->user()->can('update', $post)){
+        //     return 'You can update this';
+        // }
 
-        //$this->authorize('show-post', $post);
 
         // if (Gate::denies('show-post', $post)){
         //     abort(403, 'Sorry, not sorry');
